@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+require('express-async-errors');
 const {sequelize} = require('./model')
 const Sequelize = require('sequelize');
 const { ne, or, gte, between } = Sequelize.Op;
@@ -28,6 +29,7 @@ app.get('/contracts/:id',getProfile ,async (req, res) =>{
 
 app.get('/contracts',getProfile ,async (req, res) =>{
     const {Contract} = req.app.get('models');
+    throw new Error('aaaaa');
     const contracts = await Contract.findAll({where: { ContractorId: req.profile.id, status: { [ne]: 'terminated'} }});
     res.json(contracts);
 })
