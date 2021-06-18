@@ -182,7 +182,7 @@ describe('get best professions', () => {
     .expect('Content-Type', /json/)
     .expect(200)
     .then(response => {
-      expect(response.body).toIncludeSameMembers(['Programmer', 'Musician', 'Fighter']);
+      expect(response.body).toEqual(['Programmer', 'Musician', 'Fighter']);
     })
   })
 
