@@ -172,6 +172,32 @@ describe('pay for job', () => {
   })
 });
 
+describe('deposit to client', () => {
+  it('deposit less than 25%', async () => {
+    await request(app)
+    .post('/balances/deposit/100')
+    .set('profile_id', '2')
+    .set('Accept', 'application/json')
+    .expect(200)
+  })
+
+  it('deposit more than 25%', async () => {
+    await request(app)
+    .post('/balances/deposit/101')
+    .set('profile_id', '2')
+    .set('Accept', 'application/json')
+    .expect(400)
+  })
+
+  it('deposit negative value', async () => {
+    await request(app)
+    .post('/balances/deposit/-100')
+    .set('profile_id', '2')
+    .set('Accept', 'application/json')
+    .expect(400)
+  })
+})
+
 describe('get best professions', () => {
   it('get best profession for correct period', async () => {
     await request(app)
